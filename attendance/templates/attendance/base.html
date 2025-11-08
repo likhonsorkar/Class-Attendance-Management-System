@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Class Attendance Management System{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'attendance/css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Class Attendance Management System</h1>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'attendance:select_class' %}">Home</a></li>
+                    {% if user.is_authenticated %}
+                     <li><a href="{% url 'attendance:add_class' %}">Add Class</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Class Attendance Management System</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,460 @@
+/* Summary Table Styles */
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.summary-table th,
+.summary-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.summary-table th {
+    background-color: #f2f2f2;
+}
+
+.summary-table tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+@media (max-width: 768px) {
+    .summary-table,
+    .summary-table thead,
+    .summary-table tbody,
+    .summary-table th,
+    .summary-table td,
+    .summary-table tr {
+        display: block;
+    }
+
+    .summary-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .summary-table tr {
+        border: 1px solid #ccc;
+        margin-bottom: 5px;
+    }
+
+    .summary-table td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    .summary-table td:before {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+    }
+
+    .summary-table td:nth-of-type(1):before { content: "Roll"; }
+    .summary-table td:nth-of-type(2):before { content: "Name"; }
+    .summary-table td:nth-of-type(3):before { content: "Total Classes"; }
+    .summary-table td:nth-of-type(4):before { content: "Present"; }
+    .summary-table td:nth-of-type(5):before { content: "Percentage"; }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Global Styles & Variables --- */
+:root {
+    --primary-color: #007bff; /* Blue */
+    --secondary-color: #6c757d; /* Gray */
+    --success-color: #28a745; /* Green for success/present */
+    --danger-color: #dc3545; /* Red for errors/absent */
+    --background-light: #f8f9fa;
+    --background-white: #ffffff;
+    --text-color: #343a40;
+    --border-color: #dee2e6;
+    --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Base template content container */
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: var(--background-white);
+    border-radius: 8px;
+    box-shadow: var(--shadow-light);
+}
+
+h2 {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* --- Form Styles (Used in Add Class, Add Student, Mark Attendance) --- */
+.form-container {
+    padding: 20px;
+    background-color: var(--background-white);
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-sizing: border-box; /* Crucial for padding/border not adding to total width */
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* --- Button Styles (General) --- */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    border: none;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 6px 12px;
+    font-size: 14px;
+    margin-left: 8px;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Primary Button */
+.btn[type="submit"],
+.btn:not(.btn-secondary) {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn[type="submit"]:hover,
+.btn:not(.btn-secondary):hover {
+    background-color: #0056b3;
+}
+
+/* --- Class Selection (Select Class Template) --- */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.class-list {
+    list-style: none;
+    padding: 0;
+}
+
+.class-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 15px;
+    background-color: var(--background-white);
+    border: 1px solid var(--border-color);
+    border-left: 5px solid var(--primary-color);
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.class-list li:hover {
+    background-color: #e9ecef;
+}
+
+.class-list li > a {
+    text-decoration: none;
+    color: var(--text-color);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.class-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.class-code {
+    font-size: 0.9em;
+    color: var(--secondary-color);
+    margin-top: 3px;
+}
+
+.class-actions {
+    display: flex;
+    gap: 5px;
+}
+
+/* --- Table Styles (Attendance Marking & Summary) --- */
+.attendance-table,
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: var(--background-white);
+    border-radius: 6px;
+    overflow: hidden; /* Ensures rounded corners work for the table */
+}
+
+.attendance-table th,
+.summary-table th {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.attendance-table td,
+.summary-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.attendance-table tbody tr:nth-child(even),
+.summary-table tbody tr:nth-child(even) {
+    background-color: var(--background-light);
+}
+
+.attendance-table tbody tr:hover,
+.summary-table tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+/* Mark Attendance Specific Styles */
+.attendance-table td:last-child {
+    text-align: center;
+}
+
+.attendance-table input[type="checkbox"] {
+    transform: scale(1.5); /* Make checkbox larger */
+    cursor: pointer;
+}
+
+/* Attendance Summary Specific Styles */
+.summary-table td:nth-child(5) {
+    /* Percentage column */
+    font-weight: bold;
+}
+
+.summary-table tbody tr td:nth-child(5) {
+    /* Conditional styling for percentage, adjust thresholds as needed */
+    color: var(--success-color);
+}
+
+/* Assuming a percent less than 75 is a warning color */
+/* You would need to apply this class dynamically in your Django template:
+   e.g., <td class="{% if row.percent < 75 %}warning-percent{% endif %}">{{ row.percent }}%</td> */
+.warning-percent {
+    color: var(--danger-color) !important;
+}
+
+/* --- Login Card Container --- */
+.app-container {
+    max-width: 420px; /* Max width for a clean login box */
+    width: 90%; /* Responsive width */
+    margin: 0; /* Override body margin */
+    padding: 0;
+    background-color: transparent; 
+    box-shadow: none; 
+}
+
+.form-card {
+    padding: 30px;
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    box-shadow: var(--box-shadow-light);
+    border: 1px solid #e0e0e0;
+}
+
+h2 {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--border-subtle);
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    text-align: center;
+}
+
+/* --- Utility Spacing (for template structure) --- */
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+
+/* --- Alert/Message Styles --- */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert-info {
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+}
+
+/* --- Form Fields (Label and Input) --- */
+.input-group { 
+    margin-bottom: 20px; /* More spacing between fields */
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px; 
+    font-weight: 600; 
+    color: var(--text-main);
+    font-size: 0.95em;
+}
+
+.input-style {
+    width: 100%;
+    padding: 12px; 
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px; 
+    box-sizing: border-box; 
+    transition: border-color 0.3s, box-shadow 0.3s;
+    font-size: 1em;
+}
+
+.input-style:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1); 
+}
+
+/* Individual field error messages */
+.text-danger {
+    color: var(--status-negative); 
+    font-size: 0.8em;
+    display: block; 
+    margin-top: 5px;
+}
+
+/* --- Login Button --- */
+.action-button-primary {
+    background-color: var(--primary-color); 
+    color: white;
+    padding: 12px 20px; 
+    font-size: 17px;
+    font-weight: 700;
+    border: none;
+    border-radius: 6px;
+    width: 100%;
+    margin-top: 25px; 
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+
+.action-button-primary:hover {
+    background-color: #0056b3; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.action-button-primary:active {
+    transform: translateY(1px); 
+    box-shadow: none;
+}
+
+/* --- Forgot Password Link --- */
+.form-card p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-card p a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.form-card p a:hover {
+    text-decoration: underline;
+}
+
+/* --- Responsiveness: Tweak for small screens (Optional) --- */
+@media (max-width: 480px) {
+    /* For tiny phones, slightly reduce padding and font size */
+    .form-card {
+        padding: 20px;
+        margin: 10px;
+    }
+    h2 {
+        font-size: 1.6em;
+        margin-bottom: 20px;
+    }
+    .input-style {
+        padding: 10px;
+    }
+}

@@ -1,0 +1,28 @@
+{% extends 'attendance/base.html' %}
+{% load static %}
+
+{% block title %}Select Class{% endblock %}
+
+{% block content %}
+    <div class="header-container">
+        <h2>Select a Class</h2>
+        <a href="{% url 'attendance:add_class' %}" class="btn">Add New Class</a>
+    </div>
+    <ul class="class-list">
+        {% for c in classes %}
+            <li>
+                <a href="{% url 'attendance:mark_attendance' c.id %}">
+                    <span class="class-name">{{ c.name }}</span>
+                    <span class="class-code">{{ c.code }}</span>
+                </a>
+                <div class="class-actions">
+                    <a href="{% url 'attendance:mark_attendance' c.id %}" class="btn-secondary">Mark Attendance</a>
+                    <a href="{% url 'attendance:add_student' c.id %}" class="btn-secondary">Add Student</a>
+                    <a href="{% url 'attendance:summary' c.id %}" class="btn-secondary">Summary</a>
+                </div>
+            </li>
+        {% empty %}
+            <li>No classes found.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
